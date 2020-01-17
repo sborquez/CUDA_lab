@@ -1,0 +1,18 @@
+Pregunta 1.a
+delta_t=10^-1    n=100   elapsed=0.000000 [ms]
+delta_t=10^-2    n=1000  elapsed=15.000000 [ms]
+delta_t=10^-3    n=10000 elapsed=625.000000 [ms]
+delta_t=10^-4    n=100000        elapsed=62203.000000 [ms]
+delta_t=10^-5  n=1000000       elapsed=6068968.000000 [ms]
+Pregunta 1.b
+delta_t=10^-1 n=100 elapsed=0.049088 [ms]
+delta_t=10^-2 n=1000 elapsed=0.406432 [ms]
+delta_t=10^-3 n=10000 elapsed=14.914080 [ms]
+delta_t=10^-4 n=100000 elapsed=1331.554443 [ms]
+Pregunta 1.c
+delta_t=10^1 n=100 elapsed=0.008864 [ms]
+delta_t=10^2 n=1000 elapsed=0.008896 [ms]
+delta_t=10^3 n=10000 elapsed=1.009856 [ms]
+delta_t=10^4 n=100000 elapsed=4.023744 [ms]
+delta_t=10^5 n=1000000 elapsed=39.593248 [ms]
+delta_t=10^6 n=10000000 elapsed=401.916032 [ms]

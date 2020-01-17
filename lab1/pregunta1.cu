@@ -71,7 +71,7 @@ int main(int argc, int* argv)
         end = clock();
 
         //Mostrar resultado 
-        printf("delta_t=10^%d\tn=%d\telapsed=%f [ms]\n", m, n, (double)((1000.0*(end - start))/CLOCKS_PER_SEC));
+        printf("delta_t=10^-%d n=%d elapsed=%f [ms]\n", m, n, (double)((1000.0*(end - start))/CLOCKS_PER_SEC));
         
         free(y_t);
     }
@@ -99,7 +99,7 @@ int main(int argc, int* argv)
         cudaMemcpy(y_t, dev_y_t, (n+1)*sizeof(float), cudaMemcpyDeviceToHost);
 
         //Mostrar resultado 
-        printf("delta_t=10^%d\tn=%d\telapsed=%f [ms]\n", m, n,elapsed);
+        printf("delta_t=10^-%d n=%d elapsed=%f [ms]\n", m, n,elapsed);
         
         cudaFree(dev_y_t);
         free(y_t);
@@ -140,7 +140,7 @@ int main(int argc, int* argv)
         cudaMemcpy(y_t, dev_y_t, (n+1)*sizeof(float), cudaMemcpyDeviceToHost);
         
         //Mostrar resultado 
-        printf("delta_t=10^%d\tn=%d\telapsed=%f [ms]\n", m, n, elapsed + (double)((1000*(end - start))/CLOCKS_PER_SEC));
+        printf("delta_t=10^-%d n=%d elapsed=%f [ms]\n", m, n, elapsed + (double)((1000*(end - start))/CLOCKS_PER_SEC));
         
         free(y_t);
         free(sumatoria);
