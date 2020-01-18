@@ -4,9 +4,20 @@
 
 #define BLOCK_SIZE 256
 
+// inicializador
+void init(float* &y_ji, float* &dev_y_ji, int m) {
+    y_ji = (float*)malloc(m*sizeof(float));
+    cudaMalloc(&dev_y_ji, m*sizeof(float)); 
+    for (int j=0; j<m; ++j) {
+        y_ji[j] = j;
+    }
+    cudaMemcpy(dev_y_ji, y_ji, m*sizeof(float), cudaMemcpyHostToDevice);
+}
+
+
 // Pregunta 2.a
 void update_serial(float* y_ji, float dt, float t_i, int m) {
-    flaot t_ip = t_i - dt;
+    float t_ip = t_i - dt;
     for(int j=0; j<m; ++j) {
         y_ji[j] += dt*(4*t_ip - y_ji[j] + 3 + j);
     }
@@ -46,6 +57,7 @@ int main(int argc, int* argv)
     int m;
     int n = 1000;
     float dt = 0.001;
+    float t_i;
     
     float* y_ji;
     // float* sumatoria;
@@ -59,22 +71,26 @@ int main(int argc, int* argv)
 
     // Pregunta 2-a
     printf("Pregunta 2.a\n");
-    // for (int m=1; m<=6; m++) {
-    //     // Preparar variables
-    //     dt = powf(10.0, -1.0*m);
-    //     n = (int)powf(10, m+1);
-    //     y_t = (float*)malloc(sizeof(float)*(n+1));
+    for (int m_=4; m_<=8; m_++) {
+        // Preparar variables
+        m = (int)powf(10.0, (float)m_);
+        t_i = 0.0;
+        init(y_ji, dev_y_ji, m);
+        // Evaluacion
+        start = clock();
+        for (int i=0; i<=n; ++i) {
+            update_serial(y_ji, dt, t_i, m);
+            t_i += dt;
+        }
+        end = clock();
 
-    //     // Evaluacion
-    //     start = clock();
-    //     euler_serial(y_t, dt, n);
-    //     end = clock();
-
-    //     //Mostrar resultado 
-    //     printf("delta_t=10^-%d n=%d elapsed=%f [ms]\n", m, n, (double)((1000.0*(end - start))/CLOCKS_PER_SEC));
+        //Mostrar resultado 
+        printf("m=10^%d elapsed=%f [ms]\n", m_, (double)((1000.0*(end - start))/CLOCKS_PER_SEC));
         
-    //     free(y_t);
-    // }
+        // Liberar memoria
+        cudaFree(dev_y_ji);
+        free(y_ji);
+    }
 
     // // Pregunta 1-b
     // printf("Pregunta 1.b\n");
@@ -147,6 +163,5 @@ int main(int argc, int* argv)
 
     //     cudaFree(dev_y_t);
     //     cudaFree(dev_sumatoria);
-    }
     return 0;
 }
