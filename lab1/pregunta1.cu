@@ -34,7 +34,7 @@ void euler_hibrida_sumatoria(float dt, int n, float* sumatoria) {
         sumatoria[j] = (9*powf(j*dt, 2.0) - 4*j*dt + 5) + sumatoria[j-1];
     }
 }
-
+    
 __global__ void euler_hibrida_paralelo(float* y_t, float dt, int n, const float* __restrict__ sumatoria) {
     int Tid = threadIdx.x + blockIdx.x * blockDim.x;
     if (Tid <= n) {
